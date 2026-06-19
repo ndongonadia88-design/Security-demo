@@ -5,7 +5,7 @@ app = Flask(__name__)
 def search():
     name = request.args.get("name")
     conn = sqlite3.connect("users.db")
-    query = "SELECT * FROM users WHERE name='" + name + "'"
-    result = conn.execute(query)
+    query = "SELECT * FROM users WHERE name = ?"
+    result = conn.execute(query, (name,))
     return str(result.fetchall())
 app.run()
